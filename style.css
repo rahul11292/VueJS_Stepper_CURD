@@ -1,0 +1,265 @@
+@import "https://fonts.googleapis.com/css?family=Roboto";
+body {
+    padding: 0;
+    margin: 0;
+    background-color: #fff;
+    font-family: 'Roboto', sans-serif;
+}
+
+.step-wrapper {
+    padding: 20px 0;
+    display: none;
+}
+
+.step-wrapper.active {
+    display: block;
+    text-align: center;
+}
+
+.step-indicator {
+    border-collapse: separate;
+    display: table;
+    margin-left: 0px;
+    position: relative;
+    table-layout: fixed;
+    text-align: center;
+    vertical-align: middle;
+    padding-left: 0;
+    padding-top: 20px;
+}
+
+.step-indicator li {
+    display: table-cell;
+    position: relative;
+    float: none;
+    padding: 0;
+    width: 1%;
+}
+
+.step-indicator li:after {
+    background-color: #ccc;
+    content: "";
+    display: block;
+    height: 1px;
+    position: absolute;
+    width: 100%;
+    top: 32px;
+}
+
+.step-indicator li:after {
+    left: 50%;
+}
+
+.step-indicator li:last-child:after {
+    display: none;
+}
+
+.step-indicator li.active .step {
+    border-color: #4183D7;
+    color: #4183D7;
+}
+
+.step-indicator li.active .caption {
+    color: #4183D7;
+}
+
+.step-indicator li.complete:after {
+    background-color: #87D37C;
+}
+
+.step-indicator li.complete .step {
+    border-color: #87D37C;
+    color: #87D37C;
+}
+
+.step-indicator li.complete .caption {
+    color: #87D37C;
+}
+
+.step-indicator .step {
+    background-color: #fff;
+    border-radius: 50%;
+    border: 1px solid #ccc;
+    color: #ccc;
+    font-size: 24px;
+    height: 64px;
+    line-height: 64px;
+    margin: 0 auto;
+    position: relative;
+    width: 64px;
+    z-index: 1;
+}
+
+.step-indicator .step:hover {
+    cursor: pointer;
+}
+
+.step-indicator .caption {
+    color: #ccc;
+    padding: 11px 16px;
+}
+
+.ui.vertical.stripe h3 {
+    font-size: 2em;
+}
+
+.secondary.pointing.menu .toc.item {
+    display: none;
+}
+
+.vuetable {
+    margin-top: 1em !important;
+}
+
+.vuetable-wrapper.ui.basic.segment {
+    padding: 0em;
+}
+
+.vuetable button.ui.button {
+    padding: .5em .5em;
+    font-weight: 400;
+}
+
+.vuetable button.ui.button i.icon {
+    margin: 0;
+}
+
+.vuetable td i.handle-icon:hover {
+    cursor: pointer;
+}
+
+.vuetable-actions {
+    width: 15%;
+    padding: 12px 0px;
+    text-align: center;
+}
+
+.vuetable-pagination {
+    background: #f9fafb !important;
+}
+
+.vuetable-pagination-info {
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.highlight {
+    background-color: yellow;
+}
+
+.vuetable-detail-row {
+    height: 200px;
+}
+
+.detail-row {
+    margin-left: 40px;
+}
+
+.expand-transition {
+    transition: all .5s ease;
+}
+
+.expand-enter,
+.expand-leave {
+    height: 0;
+    opacity: 0;
+}
+
+tr.odd {
+    background-color: #e6f5ff;
+}
+
+body {
+    overflow-y: scroll;
+}
+
+.ui.container {
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+.vuetable-slot {
+    width: 7.1rem !important;
+}
+
+.adressHeading {
+    margin-top: 0.5rem;
+    margin-bottom: 0.4rem;
+}
+
+.stepperSection {
+    -webkit-box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.1);
+    -moz-box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.1);
+    padding: 1rem;
+}
+
+#snackbar {
+    visibility: hidden;
+    min-width: 250px;
+    margin-left: -125px;
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    border-radius: 2px;
+    padding: 16px;
+    position: fixed;
+    z-index: 1;
+    left: 50%;
+    bottom: 30px;
+    font-size: 17px;
+}
+
+#snackbar.show {
+    visibility: visible;
+    -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+    animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+
+@-webkit-keyframes fadein {
+    from {
+        bottom: 0;
+        opacity: 0;
+    }
+    to {
+        bottom: 30px;
+        opacity: 1;
+    }
+}
+
+@keyframes fadein {
+    from {
+        bottom: 0;
+        opacity: 0;
+    }
+    to {
+        bottom: 30px;
+        opacity: 1;
+    }
+}
+
+@-webkit-keyframes fadeout {
+    from {
+        bottom: 30px;
+        opacity: 1;
+    }
+    to {
+        bottom: 0;
+        opacity: 0;
+    }
+}
+
+@keyframes fadeout {
+    from {
+        bottom: 30px;
+        opacity: 1;
+    }
+    to {
+        bottom: 0;
+        opacity: 0;
+    }
+}
+
+.response {
+    text-align: left;
+}

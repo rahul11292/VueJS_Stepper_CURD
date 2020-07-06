@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Stepper</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.2/css/bootstrap.min.css'>
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.2/semantic.min.css" media="screen" title="no title" charset="utf-8">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css">
+    <link rel="stylesheet" href="./style.css">
+
+</head>
+
+<body>
+
+    <div class="container">
+        <div id="app">
+            <!-- {{user}} -->
+            <div class="stepperSection">
+                <step-navigation :steps="steps" :currentstep="currentstep">
+                </step-navigation>
+
+                <div v-show="currentstep == 1">
+
+                    <div class="row">
+                        <div class="col-4">
+                            <div class="form-group">
+                                <label for="name">Name</label>
+                                <input type="text" name="name" class="form-control" placeholder="Enter Name" v-model="user.name">
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="form-group">
+                                <label for="email">Email address</label>
+                                <input type="email" name="email" class="form-control" aria-describedby="emailHelp" placeholder="Enter email" v-model="user.email">
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="form-group">
+                                <label for="PhoneNumber">Phone Number</label>
+                                <input type="text" name="PhoneNumber" class="form-control" placeholder="Enter Phone Number" v-model="user.phone">
+                            </div>
+                        </div>
+                    </div>
+                    <h5 class="adressHeading">Address:</h5>
+                    <div class="row">
+
+                        <div class="col-3">
+
+                            <div class="form-group">
+                                <label for="Street">Street</label>
+                                <input type="text" name="Street" class="form-control" placeholder="Enter Street" v-model="user.address.street">
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <div class="form-group">
+                                <label for="suite">Suite</label>
+                                <input type="text" name="suite" class="form-control" placeholder="Enter Suite" v-model="user.address.suite">
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <div class="form-group">
+                                <label for="city">city</label>
+                                <input type="text" name="city" class="form-control" placeholder="Enter city" v-model="user.address.city">
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <div class="form-group">
+                                <label for="zipcode">zipcode</label>
+                                <input type="number" name="zipcode" class="form-control" placeholder="Enter zipcode" v-model="user.address.zipcode">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+                <div v-show="currentstep == 2">
+                    <div class="row">
+                        <div class="col-4">
+                            <div class="form-group">
+                                <label for="username">User Name</label>
+                                <input type="text" name="username" class="form-control" placeholder="Enter User Name" v-model="user.username">
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="form-group">
+                                <label for="CompanyName">Company Name</label>
+                                <input type="text" name="CompanyName" class="form-control" placeholder="Enter Company Name" v-model="user.company.name">
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="form-group">
+                                <label for="website">Website</label>
+                                <input type="text" name="website" class="form-control" placeholder="Enter Website" v-model="user.website">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <step v-for="step in steps" :user="user" :isedit="isedit" :idtoedit="idtoedit" :currentstep="currentstep" :key="step.id" :step="step" :stepcount="steps.length" @step-change="stepChanged" @iseditchange="editChanged" @idtoedit="editIdChanged" @currentstep="changeStepOnEdit">
+                </step>
+
+                <script type="x-template" id="step-navigation-template">
+                    <ol class="step-indicator">
+                        <li v-for="step in steps" is="step-navigation-step" :key="step.id" :step="step" :currentstep="currentstep">
+                        </li>
+                    </ol>
+                </script>
+
+                <script type="x-template" id="step-navigation-step-template">
+                    <li :class="indicatorclass">
+                        <div class="step"><i :class="step.icon_class"></i></div>
+                        <div class="caption hidden-xs hidden-sm">Step <span v-text="step.id"></span>: <span v-text="step.title"></span></div>
+                    </li>
+                </script>
+
+                <script type="x-template" id="step-template">
+                    <div class="step-wrapper" :class="stepWrapperClass">
+                        <button type="button" class="btn btn-primary" @click="lastStep" :disabled="firststep">
+                        Back
+                    </button>
+                        <button type="button" class="btn btn-primary" @click="nextStep" :disabled="laststep">
+                        Next
+                    </button>
+                        <button type="button" class="btn btn-primary" v-on:click="ClearFields">
+                        Clear
+                    </button>
+                        <button type="submit" class="btn btn-primary" v-if="laststep" v-on:click="submit">
+                        Submit
+                    </button>
+                    </div>
+                </script>
+            </div>
+
+            <div id="snackbar"></div>
+            <div class="ui container mb-3">
+                <vuetable ref="vuetable" api-url="https://jsonplaceholder.typicode.com/users" :fields="fields" data-path="mydata" pagination-path="pagination" :transform="transform" @vuetable:pagination-data="onPaginationData">
+                    <template slot="actions" scope="props">
+                  <div class="table-button-container">
+                      <button class="ui button" @click="editRow(props.rowData)"><i class="fa fa-pencil" aria-hidden="true"></i> </button>&nbsp;&nbsp;
+                      <button class="ui basic red button" @click="deleteRow(props.rowData)"><i class="fa fa-trash-o" aria-hidden="true"></i></button>&nbsp;&nbsp;
+                  </div>
+              </template>
+                </vuetable>
+                <vuetable-pagination ref="pagination" @vuetable-pagination:change-page="onChangePage"></vuetable-pagination>
+            </div>
+
+        </div>
+
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.2.6/vue.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.16.1/axios.min.js"></script>
+    <script src="https://unpkg.com/vuetable-2@1.6.0"></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/vue/2.4.4/vue.js'></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue-resource@1.5.1"></script>
+    <script src="./script.js"></script>
+</body>
+
+</html>
